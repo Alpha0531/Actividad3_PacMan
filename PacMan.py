@@ -1,12 +1,20 @@
+#Actividad 3 : PacMan
+#Alfaro González Arturo 
+#Rodrigo Aldahir Rosete Flores
+
+#Se importan las librerias correspondientes:
 from random import choice
 from turtle import *
 from freegames import floor, vector
 
+#Se definen los parametros iniciales del juego:
 state = {'score': 0}
 path = Turtle(visible=False)
 writer = Turtle(visible=False)
 aim = vector(5, 0)
+#Posición inicial del Pacman
 pacman = vector(-40, -80)
+#Posición inicial de los fantasmas:
 ghosts = [
     [vector(-180, 160), vector(5, 0)],
     [vector(-180, -160), vector(0, 5)],
@@ -14,6 +22,7 @@ ghosts = [
     [vector(100, -160), vector(-5, 0)],
 ]
 
+#Creación del tablero:
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
@@ -72,8 +81,8 @@ def valid(point):
 
     return point.x % 20 == 0 or point.y % 20 == 0
 
+#Dibuja el mundo creado:
 def world():
-    "Draw world using path."
     bgcolor('black')
     path.color('blue')
 
@@ -90,8 +99,8 @@ def world():
                 path.goto(x + 10, y + 10)
                 path.dot(2, 'white')
 
+#Función para el movimiento de PacMan y los fantasmas:
 def move():
-    "Move pacman and all ghosts."
     writer.undo()
     writer.write(state['score'])
 
@@ -110,6 +119,7 @@ def move():
         square(x, y)
 
     up()
+    #Se define el PacMan
     goto(pacman.x + 10, pacman.y + 10)
     dot(20, 'yellow')
 
@@ -130,6 +140,7 @@ def move():
           
 
         up()
+        #Define Fantasmas:
         goto(point.x + 10, point.y + 10)
         dot(20, 'red')
 
